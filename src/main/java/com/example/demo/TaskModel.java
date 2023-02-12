@@ -28,10 +28,11 @@ public class TaskModel {
     private String taskName;
     @Column(name = "status")
     private String taskStatus;
+	
 
-    // public String getTaskId() {
-    // return taskId;
-    // }
+     public String getTaskId() {
+     return ""+taskId;
+     }
 
     // public String getTaskHolderName() {
     // return taskHolderName;
@@ -57,13 +58,13 @@ public class TaskModel {
     // this.taskName = name;
     // }
 
-    // public String getTaskStatus() {
-    // return taskStatus;
-    // }
+     public String getTaskStatus() {
+     return taskStatus;
+     }
 
-    // public void setTaskStatus(String status) {
-    // this.taskStatus = status;
-    // }
+     public void setTaskStatus(String status) {
+     this.taskStatus = status;
+     }
 
     // public TaskModel(String id, String holderName, String date, String name,
     // String status) {
