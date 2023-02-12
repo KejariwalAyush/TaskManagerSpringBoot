@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@RequestMapping("/api")
 public class TaskController {
 
     private final TaskService taskService;
@@ -22,9 +24,11 @@ public class TaskController {
 
     @PostMapping("saveTask")
     public String saveTask(@RequestBody TaskModel task) {
-        taskService.addTask(task);
-
-        return "Added Task Success";
+        if (taskService.getTask("" + task.getTaskId()) == null) {
+            taskService.addTask(task);
+            return "Task Added Successfully!";
+        }
+        return "Already task exists with same id";
     }
 
     @GetMapping("alltasks")
@@ -43,8 +47,11 @@ public class TaskController {
     }
 
     @GetMapping("deleteTask")
-    public void deleteTask(@RequestParam("id") String id) {
+    public String deleteTask(@RequestParam("id") String id) {
+        if (taskService.getTask(id) == null)
+            return "Task id does not exists";
         taskService.deleteTask(id);
+        return "Task (" + id + ") Deleted Successfully";
     }
 
 }
